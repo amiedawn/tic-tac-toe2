@@ -56,7 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
       announce(DRAW);
     }
 
-  const announce = (type) => {
+  function announce(type) {  
     switch(type) {
       case PLAYER_O_WON:
         turn.classList.add('hide');
@@ -109,6 +109,8 @@ window.addEventListener('DOMContentLoaded', () => {
     isGameActive = true;
     // hide the announcer
     announcer.classList.add('hide');
+    // show the turn
+    turn.classList.remove('hide');
 
     // Player_X starts first every time
     if (currentPlayer === 'O') {
