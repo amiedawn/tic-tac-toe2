@@ -97,7 +97,7 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   const userAction = (tile, index) => {
-    if(isValidAction(tile) && isGameActive) {
+    if (isValidAction(tile) && isGameActive) {
       tile.innerText = currentPlayer;
       tile.classList.add(`player${currentPlayer}`);
       updateBoard(index);
