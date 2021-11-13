@@ -3,8 +3,9 @@ window.addEventListener('DOMContentLoaded', () => {
   const playerDisplay = document.querySelector('.display-player');
   const resetButton = document.querySelector('#reset');
   const announcer = document.querySelector('.announcer');
+  const turn = document.querySelector('.turn');
 
-  let board = ['', '', '', '', '', '', '', '', ''];
+  let board = ["", "", "", "", "", "", "", "", ""];
   let currentPlayer = 'X';
   let isGameActive = true;
 
@@ -58,12 +59,15 @@ window.addEventListener('DOMContentLoaded', () => {
   const announce = (type) => {
     switch(type) {
       case PLAYER_O_WON:
-        announcer.innerHTML = 'Player <span class="playerO">O</span> Won';
+        turn.classList.add('hide');
+        announcer.innerHTML = 'Player <span class="playerO">O</span> Won!';
         break;
       case PLAYER_X_WON:
-        announcer.innerHTML = 'Player <span class="playerX">X</span> Won';
+        turn.classList.add('hide');
+        announcer.innerHTML = 'Player <span class="playerX">X</span> Won!';
         break;
       case DRAW: 
+        turn.classList.add('hide');
         announcer.innerText = 'Draw!';  
     }
     announcer.classList.remove('hide');

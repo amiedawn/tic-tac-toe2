@@ -5,9 +5,12 @@
 }
 
 .background {
-    background-color: #12181B;
+    background-color: #023047;
     height: 100vh;
     padding-top: 1px;
+    box-sizing: border-box;
+    border: 10px solid #fb8500;
+    margin: 25px;
 }
 
 .title {
@@ -53,12 +56,29 @@ h5 {
     cursor: pointer;
 }
 
+/* remove outer border so it looks like standard tic-tac-toe board */
+.cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) {
+	border-top: none;
+}
+
+.cell:nth-child(1), .cell:nth-child(4), .cell:nth-child(7) {
+	border-left: none;
+}
+
+.cell:nth-child(3), .cell:nth-child(6), .cell:nth-child(9) {
+	border-right: none;
+}
+
+.cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) {
+	border-bottom: none;
+}
+
 .playerX {
-    color: #09C372;
+    color: #8ecae6;
 }
 
 .playerO {
-    color: #498AFB;
+    color: #219ebc;
 }
 
 .controls {
@@ -80,9 +100,9 @@ h5 {
 }
 
 .restart {
-    background-color: #498AFB;
+    background-color: #ffb703;
 }
 
 #reset {
-    background-color: #FF3860;
+    background-color: #fb8500;
 }
