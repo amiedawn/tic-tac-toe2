@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const tiles = Array.from(document.querySelectorAll('.tile'));
+  const cells = Array.from(document.querySelectorAll('.cell'));
   const playerDisplay = document.querySelector('.display-player');
   const resetButton = document.querySelector('#reset');
   const announcer = document.querySelector('.announcer');
@@ -9,16 +9,9 @@ window.addEventListener('DOMContentLoaded', () => {
   let isGameActive = true;
 
   // 3 constants to determine endGame state
-  const PLAYERX_WON = 'PLAYERX_WON';
-  const PLAYERO_WON = 'PLAYERO_WON';
-  const TIE = 'TIE';
-
-  /*
-    Indexes in the board
-    [0] [1] [2]
-    [3] [4] [5]
-    [6] [7] [8]
-  */
+  const PLAYER_X_WON = 'PLAYER_X_WON!';
+  const PLAYER_O_WON = 'PLAYER_O_WON!';
+  const DRAW = 'DRAW';
 
   // winning state
   const winningConditions = [
@@ -52,33 +45,33 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     if (roundWon) {
-      announce(currentPlayer === 'X' ? PLAYERX_WON : PLAYERO_WON);
+      announce(currentPlayer === 'X' ? PLAYER_X_WON : PLAYER_O_WON);
       isGameActive = false;
       return;
     }
 
     // if every cell has been played
     if (!board.includes(''))
-      announce(TIE);
+      announce(DRAW);
     }
 
   const announce = (type) => {
     switch(type) {
-      case PLAYERO_WON:
+      case PLAYER_O_WON:
         announcer.innerHTML = 'Player <span class="playerO">O</span> Won';
         break;
-      case PLAYERX_WON:
+      case PLAYER_X_WON:
         announcer.innerHTML = 'Player <span class="playerX">X</span> Won';
         break;
-      case TIE: 
-        announcer.innerText = 'Tie Game';  
+      case DRAW: 
+        announcer.innerText = 'Draw!';  
     }
     announcer.classList.remove('hide');
   };
 
-  // if someone has already played a tile, they cannot choose it again in the same game
-  const isValidAction = (tile) => {
-    if (tile.innerText === 'X' || tile.innerText === 'O') {
+  // if someone has already played a cell, they cannot choose it again in the same game
+  const isValidAction = (cell) => {
+    if (cell.innerText === 'X' || cell.innerText === 'O') {
       return false;
     }
 
@@ -96,10 +89,10 @@ window.addEventListener('DOMContentLoaded', () => {
     playerDisplay.classList.add(`player${currentPlayer}`);
   };
 
-  const userAction = (tile, index) => {
-    if (isValidAction(tile) && isGameActive) {
-      tile.innerText = currentPlayer;
-      tile.classList.add(`player${currentPlayer}`);
+  const userAction = (cell, index) => {
+    if (isValidAction(cell) && isGameActive) {
+      cell.innerText = currentPlayer;
+      cell.classList.add(`player${currentPlayer}`);
       updateBoard(index);
       handleResultValidation();
       changePlayer();
@@ -113,21 +106,21 @@ window.addEventListener('DOMContentLoaded', () => {
     // hide the announcer
     announcer.classList.add('hide');
 
-    // PlayerX starts first every time
+    // Player_X starts first every time
     if (currentPlayer === 'O') {
       changePlayer();
     }
 
-    // make every tile empty and remove classes from each tile
-    tiles.forEach(tile => {
-      tile.innerText = "";
-      tile.classList.remove('playerX');
-      tile.classList.remove('playerO');
+    // make every cell empty and remove classes from each cell
+    cells.forEach(cell => {
+      cell.innerText = "";
+      cell.classList.remove('playerX');
+      cell.classList.remove('playerO');
     });
   };
 
-  tiles.forEach((tile, index) => {
-    tile.addEventListener('click', () => userAction(tile, index));
+  cells.forEach((cell, index) => {
+    cell.addEventListener('click', () => userAction(cell, index));
   });
 
   resetButton.addEventListener('click', resetBoard);
