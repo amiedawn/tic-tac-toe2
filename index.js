@@ -74,7 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   // if someone has already played a cell, they cannot choose it again in the same game
-  const isValidAction = (cell) => {
+  function isValidAction(cell) {
     if (cell.innerText === 'X' || cell.innerText === 'O') {
       return false;
     }
@@ -82,18 +82,18 @@ window.addEventListener('DOMContentLoaded', () => {
     return true;
   };
 
-  const updateBoard = (index) => {
+  function updateBoard(index) {  
     board[index] = currentPlayer;
   };
 
-  const changePlayer = () => {
+  function changePlayer() {  
     playerDisplay.classList.remove(`player${currentPlayer}`);
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     playerDisplay.innerText = currentPlayer;
     playerDisplay.classList.add(`player${currentPlayer}`);
   };
 
-  const userAction = (cell, index) => {
+  function userAction(cell, index) {  
     if (isValidAction(cell) && isGameActive) {
       cell.innerText = currentPlayer;
       cell.classList.add(`player${currentPlayer}`);
@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const resetBoard = () => {
+  function resetBoard() {  
     // have board have 9 empty strings
     board = ["", "", "", "", "", "", "", "", ""];
     isGameActive = true;
